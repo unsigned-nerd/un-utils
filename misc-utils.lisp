@@ -1,10 +1,12 @@
+; to use this package, you have to load :cl-ppcre system from quicklisp first
 (defpackage :un-utils/misc-utils
-  (:use :common-lisp)
+  (:use :common-lisp :cl-ppcre)
   (:export
     #:parse-decimal
     #:print-line
     #:prompt-for-input
-    #:utf16-to-char))
+    #:utf16-to-char
+    #:time-periods-to-minutes))
 
 (in-package :un-utils/misc-utils)
 
@@ -33,3 +35,14 @@
 (defun utf16-to-char (utf16-string)
   ; "\u0061" to #\u0061
   (format t "whatho: ~A" (coerce "#\u0e01" 'character)))
+
+; take an input string like this:
+;
+;    12:08-14:05, 15:07-18:20
+;
+; and convert it into minutes like the result of the calculation below:
+;
+;   (13-12)*60+(60-8)+5+(18-15)*60 + (18-15)*60+(20-7) == 490 minutes
+;
+(defun time-periods-to-minutes (time-period-string)
+  (print (cl-ppcre:split "[\\s]*,[\\s]*" time-period-string)))
