@@ -45,4 +45,9 @@
 ;   (13-12)*60+(60-8)+5+(18-15)*60 + (18-15)*60+(20-7) == 490 minutes
 ;
 (defun time-periods-to-minutes (time-period-string)
-  (print (cl-ppcre:split "[\\s]*,[\\s]*" time-period-string)))
+  ; (cl-ppcre:split "[\\s]*,[\\s]*" time-period-string), for example,
+  ; converts "12:08-14:05, 15:07-18:20" into ("12:08-14:05" "15:07-18:20")
+  (loop for x in (cl-ppcre:split "[\\s]*,[\\s]*" time-period-string)
+     do
+       (cl-ppcre:register-groups-bind (start-time end-time) ((cl-ppcre:create-scanner "(.*)-(.*)") x :sharedp t)
+	 (format t "~a ! ~a~%" start-time end-time))))
