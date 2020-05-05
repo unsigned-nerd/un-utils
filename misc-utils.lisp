@@ -50,4 +50,4 @@
   (loop for x in (cl-ppcre:split "[\\s]*,[\\s]*" time-period-string)
      do
        (cl-ppcre:register-groups-bind (start-time end-time) ((cl-ppcre:create-scanner "(.*)-(.*)") x :sharedp t)
-	 (format t "~a ! ~a~%" start-time end-time))))
+         (format t "~a ! ~a~%" start-time end-time))))
