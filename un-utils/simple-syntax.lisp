@@ -10,7 +10,7 @@
 ;
 ; Loop through the file input stream line by line.
 ;
-; Intentional variable capture
+; Anaphoric macro, intentional variable capture
 ;
 ;   $line - each line in the input stream
 ;
