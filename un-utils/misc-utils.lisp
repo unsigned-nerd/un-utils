@@ -7,7 +7,10 @@
 
 (in-package :un-utils.misc-utils)
 
-; convert string into decimal
+;
+; Convert string into decimal.  in-str can be a Lisp expression.  So, user can tamper with the
+; program which can be a good or bad thing depending on the situation.
+;
 (defun parse-decimal (in-str)
   (with-input-from-string (in in-str)
     (read in)))
