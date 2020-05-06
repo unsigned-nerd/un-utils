@@ -11,8 +11,10 @@
 (defun parse-decimal (in-str)
   (with-input-from-string (in in-str)
     (read in)))
-
-; prompt for input from the command-line
+;
+; Prompt for input from the command-line.  Input can be Lisp expression.  So, user can tamper with
+; the program which can be a good or bad thing depending on the situation.
+;
 (defmacro prompt-for-input (prompt-message &optional var)
    `(progn
      (format t ,prompt-message)
