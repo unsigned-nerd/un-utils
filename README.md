@@ -1,5 +1,6 @@
 # un-utils
-my common lisp utilities
+
+My common lisp utilities
 
 # INSTALL
 
@@ -12,5 +13,5 @@ $ sbcl
 
 (require "asdf")
 (require "un-utils")
-(un-utils/misc-utils:print-line "hello world!")
+(un-utils.misc-utils:print-line "hello world!")
 ```
