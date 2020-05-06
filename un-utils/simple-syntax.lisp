@@ -3,7 +3,7 @@
 (defpackage :un-utils.simple-syntax
   (:use :common-lisp)
   (:export
-    #:for-each-$line-in #:$line #:print-line))
+    #:for-each-$line-in #:$line #:print-line #:while))
 
 (in-package :un-utils.simple-syntax)
 
@@ -24,3 +24,15 @@
 ; Print the specified text with a newline to *standard-output*
 (defmacro print-line (formatted-string &rest args)
   `(format t ,(concatenate 'string formatted-string "~%") ,@args))
+
+; Example:
+;
+;  (let ((x 0))
+;    (while (< x 10)
+;      (princ x)
+;      (incf x)))
+;
+(defmacro while (test &rest body)
+  `(do ()
+       ((not ,test))
+     ,@body))
