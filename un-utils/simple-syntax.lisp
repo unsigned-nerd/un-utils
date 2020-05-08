@@ -14,6 +14,11 @@
 ;
 ;   $line - each line in the input stream
 ;
+; Example:
+;
+;   (for-each-$line-in *standard-input*
+;     (print-line "- ~A" $line))
+;
 (defmacro for-each-$line-in (in-stream &rest body)
   `(let ($line)
      (loop for $line = (read-line ,in-stream nil 'eof)
