@@ -3,7 +3,8 @@
   (:export
     #:parse-decimal
     #:prompt-for-input
-    #:utf16-to-char))
+    #:utf16-to-char
+    #:with-interned-symbols))
 
 (in-package :un-utils.misc-utils)
 
@@ -25,3 +26,15 @@
      ,(if (null var)
        `(read-line)
        `(setf ,var (read-line)))))
+
+;
+; When we write a macro that is an anaphoric macro, use with-interned-symbols to intern all symbols
+; that will be available to the caller.  This will solve problem that comes from the usage of
+; package.
+;
+; https://stackoverflow.com/questions/44199651/exporting-anaphoric-macros-in-common-lisp-packages
+;
+(defmacro with-interned-symbols (symbol-list &body body)
+  "Interns a set of symbols in the current package to variables of the same (symbol-name)."
+  (let ((symbol-list (mapcar (lambda (s) (list s `(intern (symbol-name ',s)))) symbol-list)))
+    `(let ,symbol-list ,@body)))
